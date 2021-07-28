@@ -23,7 +23,7 @@ client.connect(mqttBroker, mqttPort, mqttKeepAlive)
 
 client.loop_start()
 
-client.subscribe("+/watermeter/#")
+client.subscribe("watermeter/#")
 client.on_message=on_message 
 
 # client.loop_forever()
