@@ -2,4 +2,4 @@ serial
 pyowm
 configparser
 influxdb
-paho.mqtt.client
+paho-mqtt
