@@ -9,8 +9,9 @@ config.read("watermeter_config.ini")
 log_path = config.get('Logging', 'log_path', fallback='/var/log/solar/')
 do_raw_log = config.getboolean('Logging', 'do_raw_log')
 
-print("test")
 mqttBroker = config.get('watermeter', 'mqttBroker')
+mqttPort = config.get('watermeter', 'mqttPort')
+mqttKeepAlive = config.get('watermeter', 'mqttKeepAlive')
 
 print(mqttBroker)
 
@@ -18,12 +19,15 @@ def on_message(client, userdata, message):
     print("received message: " ,str(message.payload.decode("utf-8")))
 
 client = mqtt.Client("reader")
-client.connect(mqttBroker) 
+client.connect(mqttBroker, mqttPort, mqttKeepAlive) 
 
 client.loop_start()
 
-client.subscribe("#")
+client.subscribe("+/watermeter/#")
+client.on_connect = on_connect
 client.on_message=on_message 
 
-time.sleep(30)
+# client.loop_forever()
+
+time.sleep(900)
 client.loop_stop()
