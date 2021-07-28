@@ -1,0 +1,5 @@
+serial
+pyowm
+configparser
+influxdb
+paho
