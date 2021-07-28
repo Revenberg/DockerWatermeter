@@ -10,8 +10,8 @@ log_path = config.get('Logging', 'log_path', fallback='/var/log/solar/')
 do_raw_log = config.getboolean('Logging', 'do_raw_log')
 
 mqttBroker = config.get('watermeter', 'mqttBroker')
-mqttPort = config.get('watermeter', 'mqttPort')
-mqttKeepAlive = config.get('watermeter', 'mqttKeepAlive')
+mqttPort = int(config.get('watermeter', 'mqttPort'))
+mqttKeepAlive = int(config.get('watermeter', 'mqttKeepAlive'))
 
 print(mqttBroker)
 
