@@ -46,7 +46,6 @@ def getData():
     client.loop_stop()
 
 print( "000")
-print( today.strftime("%d/%m/%Y %H:%M:%S") )
 
 while True:
     try: 
