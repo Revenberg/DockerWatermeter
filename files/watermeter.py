@@ -3,6 +3,7 @@ import time
 import configparser
 import sys
 import json
+import datetime
 
 config = configparser.RawConfigParser(allow_no_value=True)
 config.read("watermeter_config.ini")
@@ -45,8 +46,13 @@ def getData():
     client.loop_stop()
 
 print( "000")
+print( today.strftime("%d/%m/%Y %H:%M:%S") )
+
 while True:
     try: 
+        today = datetime.date.today()
+        print( today.strftime("%d/%m/%Y %H:%M:%S") )
+
         getData()
     except:
         pass
