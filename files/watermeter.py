@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 import time
 import configparser
 import sys
+import json
 
 config = configparser.RawConfigParser(allow_no_value=True)
 config.read("watermeter_config.ini")
@@ -15,18 +16,19 @@ mqttKeepAlive = int(config.get('watermeter', 'mqttKeepAlive'))
 
 print(mqttBroker)
 
-current_value = 0
-pulse_count = 0
+values = dict()
 
 def on_message(client, userdata, msg):
-    global current_value 
-    global pulse_count
+    global values
+
     if msg.topic .lower() == "watermeter/reading/current_value" :
-        current_value = int(str(msg.payload.decode("utf-8")))
+        values['current_value'] = int(str(msg.payload.decode("utf-8")))
     if msg.topic .lower() == "watermeter/reading/pulse_count" :
-        pulse_count = int(str(msg.payload.decode("utf-8")))
+        values['pulse_count'] = int(str(msg.payload.decode("utf-8")))
 
 def getData():
+    global values
+
     client = mqtt.Client("reader")
     client.connect(mqttBroker, mqttPort, mqttKeepAlive) 
 
@@ -35,9 +37,9 @@ def getData():
     client.subscribe("#")
     client.on_message=on_message 
 
-#    client.loop_forever()
+    time.sleep(30)
 
-    time.sleep(10)
+    print( json.dumps(values) )
     client.loop_stop()
 
 while True:
