@@ -40,8 +40,9 @@ def getData():
     time.sleep(10)
     client.loop_stop()
 
-while True:
-    try: 
-        getData()
-    except:
-        pass
+#while True:
+#    try: 
+#        getData()
+#    except:
+#        pass
+getData()
