@@ -16,7 +16,8 @@ mqttKeepAlive = int(config.get('watermeter', 'mqttKeepAlive'))
 print(mqttBroker)
 
 def on_message(client, userdata, msg):
-    print(msg.topic+" "+str(msg.payload.decode("utf-8")))
+    print(str(msg.payload))
+    print(msg.topic + " " + str(msg.payload) )
 
 client = mqtt.Client("reader")
 client.connect(mqttBroker, mqttPort, mqttKeepAlive) 
