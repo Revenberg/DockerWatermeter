@@ -37,7 +37,7 @@ def getData():
     client.subscribe("#")
     client.on_message=on_message 
 
-    time.sleep(30)
+    time.sleep(10)
     print( json.dumps(values) )
 
     client.loop_stop()
