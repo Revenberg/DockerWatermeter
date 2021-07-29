@@ -41,10 +41,8 @@ def getData():
     client.loop_stop()
 
 
-#while True:
-#    try: 
-#        getData()
-#    except:
-#        pass
-
-getData()
+while True:
+    try: 
+        getData()
+    except:
+        pass
