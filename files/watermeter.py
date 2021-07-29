@@ -42,11 +42,12 @@ def getData():
 
     client.loop_stop()
 
-while True:
-    try: 
-        today = datetime.date.today()
-        print( today.strftime("%d/%m/%Y %H:%M:%S") )
+#while True:
+#    try: 
+#        today = datetime.date.today()
+#        print( today.strftime("%d/%m/%Y %H:%M:%S") )
 
-        getData()
-    except:
-        pass
+#        getData()
+#    except:
+#        pass
+getData()
