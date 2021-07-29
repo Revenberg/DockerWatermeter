@@ -22,8 +22,7 @@ values = dict()
 def on_message(client, userdata, msg):
     global values
     today = datetime.date.today()
-    print( today.strftime("%d/%m/%Y %H:%M:%S") )
-
+    
     if msg.topic .lower() == "watermeter/reading/current_value" :
         values['current_value'] = int(str(msg.payload.decode("utf-8")))
         values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
@@ -44,10 +43,10 @@ def getData():
     client.subscribe("#")
     client.on_message=on_message
 
-    time.sleep(10)
-    print( json.dumps(values) )
-    time.sleep(30)
-
+    while True:
+        time.sleep(10)
+        print( json.dumps(values) )
+    
 #    client.loop_stop()
 
 today = datetime.date.today()
