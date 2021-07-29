@@ -30,6 +30,7 @@ def on_message(client, userdata, msg):
     if msg.topic .lower() == "watermeter/reading/pulse_count" :
         values['pulse_count'] = int(str(msg.payload.decode("utf-8")))
         values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
+    print( json.dumps(values) )
 
 def getData():
     global values
@@ -45,7 +46,6 @@ def getData():
 
     while True:
         time.sleep(10)
-        print( json.dumps(values) )
     
 #    client.loop_stop()
 
