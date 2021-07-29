@@ -32,18 +32,16 @@ def on_message(client, userdata, msg):
         values['pulse_count'] = int(str(msg.payload.decode("utf-8")))
         values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
 
-    print( today.strftime("%d/%m/%Y %H:%M:%S") )
-
 def getData():
     global values
 
     client = mqtt.Client("reader")
-    client.connect(mqttBroker, mqttPort, mqttKeepAlive) 
+    client.connect(mqttBroker, mqttPort, mqttKeepAlive)
 
     client.loop_start()
 
     client.subscribe("#")
-    client.on_message=on_message 
+    client.on_message=on_message
 
 #    time.sleep(10)
     print( json.dumps(values) )
@@ -55,7 +53,7 @@ today = datetime.date.today()
 print( today.strftime("%d/%m/%Y %H:%M:%S") )
 
 #while True:
-#    try: 
+#    try:
 #        today = datetime.date.today()
 #        print( today.strftime("%d/%m/%Y %H:%M:%S") )
 
