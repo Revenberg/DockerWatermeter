@@ -21,7 +21,7 @@ values = dict()
 
 def on_message(client, userdata, msg):
     global values
-    today = datetime.date.today()
+    today = datetime.date
     
     if msg.topic .lower() == "watermeter/reading/current_value" :
         values['current_value'] = int(str(msg.payload.decode("utf-8")))
@@ -30,6 +30,7 @@ def on_message(client, userdata, msg):
     if msg.topic .lower() == "watermeter/reading/pulse_count" :
         values['pulse_count'] = int(str(msg.payload.decode("utf-8")))
         values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
+    
     print( json.dumps(values) )
 
 def getData():
@@ -39,15 +40,15 @@ def getData():
 
     client.connect(mqttBroker, mqttPort, mqttKeepAlive)
 
-    client.loop_start()
-
-    client.subscribe("#")
-    client.on_message=on_message
-
     while True:
+        client.loop_start()
+
+        client.subscribe("#")
+        client.on_message=on_message
+
         time.sleep(10)
-    
-#    client.loop_stop()
+        
+        client.loop_stop()
 
 today = datetime.date.today()
 print( today.strftime("%d/%m/%Y %H:%M:%S") )
