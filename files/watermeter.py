@@ -31,7 +31,9 @@ def on_message(client, userdata, msg):
     if msg.topic .lower() == "watermeter/reading/pulse_count" :
         values['pulse_count'] = int(str(msg.payload.decode("utf-8")))
         values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
-    
+
+    print( today.strftime("%d/%m/%Y %H:%M:%S") )
+
 def getData():
     global values
 
