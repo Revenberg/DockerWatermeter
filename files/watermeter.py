@@ -21,10 +21,15 @@ values = dict()
 
 def on_message(client, userdata, msg):
     global values
+    today = datetime.date.today()
+
     if msg.topic .lower() == "watermeter/reading/current_value" :
         values['current_value'] = int(str(msg.payload.decode("utf-8")))
+        values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
+
     if msg.topic .lower() == "watermeter/reading/pulse_count" :
         values['pulse_count'] = int(str(msg.payload.decode("utf-8")))
+        values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
     
 def getData():
     global values
@@ -50,4 +55,5 @@ def getData():
 #        getData()
 #    except:
 #        pass
+
 getData()
