@@ -34,8 +34,9 @@ def on_message(client, userdata, msg):
 
 def getData():
     global values
-
+    
     client = mqtt.Client("reader")
+
     client.connect(mqttBroker, mqttPort, mqttKeepAlive)
 
     client.loop_start()
@@ -43,11 +44,11 @@ def getData():
     client.subscribe("#")
     client.on_message=on_message
 
-#    time.sleep(10)
+    time.sleep(10)
     print( json.dumps(values) )
+    time.sleep(30)
 
 #    client.loop_stop()
-    client.loop_forever()
 
 today = datetime.date.today()
 print( today.strftime("%d/%m/%Y %H:%M:%S") )
