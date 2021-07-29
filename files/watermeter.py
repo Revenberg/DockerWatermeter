@@ -35,11 +35,10 @@ def getData():
     client.subscribe("watermeter/#")
     client.on_message=on_message 
 
-    # client.loop_forever()
+    client.loop_forever()
 
-    time.sleep(60)
-    client.loop_stop()
-
+    #time.sleep(60)
+    #client.loop_stop()
 
 while True:
     try: 
