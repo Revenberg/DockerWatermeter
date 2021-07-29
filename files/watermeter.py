@@ -18,21 +18,13 @@ print(mqttBroker)
 def on_message(client, userdata, msg):
     print(msg.topic + " " + str(msg.payload.decode("utf-8")))
 
-print("001")
-
 client = mqtt.Client("reader")
 client.connect(mqttBroker, mqttPort, mqttKeepAlive) 
 
-print("002")
-
 client.loop_start()
-
-print("003")
 
 client.subscribe("#")
 client.on_message=on_message 
-
-print("004")
 
 # client.loop_forever()
 
