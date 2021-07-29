@@ -15,14 +15,13 @@ mqttKeepAlive = int(config.get('watermeter', 'mqttKeepAlive'))
 
 print(mqttBroker)
 
-current_value = 0
-
 def on_message(client, userdata, msg):
-    print("test")
+    current_value = 0
+    print("test 1")
     print(msg.topic + " " + str(msg.payload.decode("utf-8")))
     if msg.topic .lower() == "watermeter/reading/current_value" :
         current_value = int(str(msg.payload.decode("utf-8")))
-    print("test")
+    print("test 2")
     print( current_value )
 
 def getData():
