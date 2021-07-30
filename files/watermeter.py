@@ -50,7 +50,7 @@ def getData():
         
         client.loop_stop()
 
-today = datetime.date.today()
+today = datetime.date
 print( today.strftime("%d/%m/%Y %H:%M:%S") )
 
 #while True:
