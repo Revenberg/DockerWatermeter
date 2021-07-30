@@ -21,8 +21,8 @@ values = dict()
 
 def on_message(client, userdata, msg):
     global values
-    today = datetime.now()
-    
+    today = datetime.today()
+
     if msg.topic .lower() == "watermeter/reading/current_value" :
         values['current_value'] = int(str(msg.payload.decode("utf-8")))
         values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
@@ -50,8 +50,12 @@ def getData():
         
         client.loop_stop()
 
-today = datetime.now()
-print( today.strftime("%d/%m/%Y %H:%M:%S") )
+today = datetime.today()
+print(today.strftime("%d/%m/%Y %H:%M:%S")
+
+t = time.localtime()
+current_time = time.strftime("%H:%M:%S", t)
+print(current_time)
 
 #while True:
 #    try:
