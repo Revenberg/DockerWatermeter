@@ -25,6 +25,9 @@ def on_message(client, userdata, msg):
         values['pulse_count'] = int(str(msg.payload.decode("utf-8")))
         values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
     
+    today = datetime.datetime.now()
+    print( today.strftime("%d/%m/%Y %H:%M:%S") )
+        
 def getData(mqttBroker, mqttPort, mqttKeepAlive):
     global values
     
@@ -43,7 +46,7 @@ def getData(mqttBroker, mqttPort, mqttKeepAlive):
     
         today = datetime.datetime.now()
         print( today.strftime("%d/%m/%Y %H:%M:%S") )
-        
+
         print("=========== 002 ===============================")
         print( json.dumps(values) )
         print("=========== 003 ===============================")
