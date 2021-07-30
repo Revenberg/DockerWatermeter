@@ -5,6 +5,7 @@ import sys
 import json
 import datetime
 import init_db
+from influxdb import InfluxDBClient
 
 config = configparser.RawConfigParser(allow_no_value=True)
 config.read("watermeter_config.ini")
