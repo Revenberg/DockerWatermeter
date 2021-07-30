@@ -21,8 +21,6 @@ influx_port = int(config.get('InfluxDB', 'influx_port'))
 influx_database = config.get('InfluxDB', 'database')
 influx_measurement = config.get('InfluxDB', 'measurement')
 
-print(mqttBroker)
-
 values = dict()
 
 def on_message(mqtt_client, userdata, msg):
