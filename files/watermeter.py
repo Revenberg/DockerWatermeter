@@ -1,9 +1,10 @@
-import paho.mqtt.client as mqtt
+import paho.mqtt.mqtt_client as mqtt
 import time
 import configparser
 import sys
 import json
 import datetime
+import init_db
 
 config = configparser.RawConfigParser(allow_no_value=True)
 config.read("watermeter_config.ini")
@@ -15,11 +16,16 @@ mqttBroker = config.get('watermeter', 'mqttBroker')
 mqttPort = int(config.get('watermeter', 'mqttPort'))
 mqttKeepAlive = int(config.get('watermeter', 'mqttKeepAlive'))
 
+influx_server = config.get('InfluxDB', 'influx_server')
+influx_port = int(config.get('InfluxDB', 'influx_port'))
+influx_database = config.get('InfluxDB', 'database')
+influx_measurement = config.get('InfluxDB', 'measurement')
+
 print(mqttBroker)
 
 values = dict()
 
-def on_message(client, userdata, msg):
+def on_message(mqtt_client, userdata, msg):
     global values
     today = datetime.datetime.now()
 
@@ -34,23 +40,56 @@ def on_message(client, userdata, msg):
 def getData(mqttBroker, mqttPort, mqttKeepAlive):
     global values
     
-    client = mqtt.Client("reader")
+    mqtt_client = mqtt.Client("reader")
 
-    client.connect(mqttBroker, mqttPort, mqttKeepAlive)
+    mqtt_client.connect(mqttBroker, mqttPort, mqttKeepAlive)
 
     while True:
-        client.loop_start()
+        mqtt_client.loop_start()
 
-        client.subscribe("#")
-        client.on_message=on_message
+        mqtt_client.subscribe("#")
+        mqtt_client.on_message=on_message
 
         time.sleep(60)
 
-        print("===============================================")
-        print( json.dumps(values) )
-        print("===============================================")
-        sys.stdout.flush()
+        json_body = {'points': [{
+                        'fields': {k: v for k, v in values.items()}
+                                }],
+                    'measurement': influx_measurement
+                    }        
         
-        client.loop_stop()
+        print( json.dumps(json_body) )
+        sys.stdout.flush()
+
+        client = InfluxDBClient(host=influx_server,
+                        port=influx_port)
+
+        success = client.write(json_body,
+                            # params isneeded, otherwise error 'database is required' happens
+                            params={'db': influx_database})
+
+        if not success:
+            print('error writing to database')
+        
+        mqtt_client.loop_stop()
+
+def openDatabase():
+    # if the db is not found, then try to create it
+    try:
+        dbclient = InfluxDBClient(host=influx_server, port=influx_port )
+        dblist = dbclient.get_list_database()
+        db_found = False
+        for db in dblist:
+            if db['name'] == influx_database:
+                db_found = True
+        if not(db_found):
+            print( dbclient.get_list_continuous_queries())
+            sys.exit('Database ' + influx_database + ' not found, create it')
+
+    except Exception as e:
+        print(e)
+        sys.exit('Error querying open influx_server: ' + influx_server)
+
+openDatabase()
 
 getData(mqttBroker, mqttPort, mqttKeepAlive)
