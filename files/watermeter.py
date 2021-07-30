@@ -51,7 +51,7 @@ def getData():
         client.loop_stop()
 
 today = datetime.today()
-print(today.strftime("%d/%m/%Y %H:%M:%S")
+print(today.strftime("%d/%m/%Y %H:%M:%S") )
 
 t = time.localtime()
 current_time = time.strftime("%H:%M:%S", t)
