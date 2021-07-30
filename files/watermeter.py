@@ -49,6 +49,7 @@ def getData(mqttBroker, mqttPort, mqttKeepAlive):
         print("===============================================")
         print( json.dumps(values) )
         print("===============================================")
+        sys.stdout.flush()
         
         client.loop_stop()
 
