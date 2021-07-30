@@ -1,4 +1,4 @@
-import paho.mqtt.mqtt_client as mqtt
+import paho.mqtt.client as mqtt
 import time
 import configparser
 import sys
