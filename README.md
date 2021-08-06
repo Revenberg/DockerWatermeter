@@ -1,12 +1,12 @@
-# DockerWatermeter
+# dockerwatermeter
 
 sudo apt install gnupg2 pass
-docker image build -t DockerWatermeter  .
+docker image build -t dockerwatermeter  .
 docker login -u revenberg
-docker image push revenberg/DockerWatermeter:latest
+docker image push revenberg/dockerwatermeter:latest
 
-docker run revenberg/DockerWatermeter
+docker run revenberg/dockerwatermeter
 
 docker exec -it ??? /bin/sh
 
-docker push revenberg/DockerWatermeter:
+docker push revenberg/dockerwatermeter:

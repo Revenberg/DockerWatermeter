@@ -3,15 +3,15 @@
 git pull
 chmod +x build.sh
 
-docker image build -t revenberg/DockerWatermeter .
+docker image build -t revenberg/dockerwatermeter .
 
-docker push revenberg/DockerWatermeter
+docker push revenberg/dockerwatermeter
 
 # testing: 
 
 echo "==========================================================="
 echo "=                                                         ="
-echo "=          docker run revenberg/DockerWatermeter                ="
+echo "=          docker run revenberg/dockerwatermeter                ="
 echo "=                                                         ="
 echo "==========================================================="
-# docker run revenberg/DockerWatermeter
+# docker run revenberg/dockerwatermeter
