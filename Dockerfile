@@ -7,4 +7,4 @@ COPY config/* /app/
 WORKDIR /app
 RUN pip install -r requirements.txt
 
-CMD python ./watermeter.py
+CMD python ./DockerWatermeter.py

@@ -9,7 +9,7 @@ import configparser
 from influxdb import InfluxDBClient
 
 config = configparser.RawConfigParser(allow_no_value=True)
-config.read("watermeter_config.ini")
+config.read("DockerWatermeter_config.ini")
 
 ###########################
 # Variables
@@ -47,9 +47,9 @@ try:
 
     print( dbclient.get_list_continuous_queries() )
         
-    watermeter_select_clause = 'SELECT mean("current_value") as "current_value",mean("pulse_count") as "pulse_count"'
-    dbclient.create_continuous_query("watermeter_mean60", watermeter_select_clause + ' INTO "60_days"."watermeter" FROM "watermeter" GROUP BY time(15m)', influx_database )
-    dbclient.create_continuous_query("watermeter_meaninf", watermeter_select_clause + ' INTO "infinite"."watermeter" FROM "watermeter" GROUP BY time(30m)', influx_database )
+    DockerWatermeter_select_clause = 'SELECT mean("current_value") as "current_value",mean("pulse_count") as "pulse_count"'
+    dbclient.create_continuous_query("DockerWatermeter_mean60", DockerWatermeter_select_clause + ' INTO "60_days"."DockerWatermeter" FROM "DockerWatermeter" GROUP BY time(15m)', influx_database )
+    dbclient.create_continuous_query("DockerWatermeter_meaninf", DockerWatermeter_select_clause + ' INTO "infinite"."DockerWatermeter" FROM "DockerWatermeter" GROUP BY time(30m)', influx_database )
 
     print( dbclient.get_list_continuous_queries() )
 
