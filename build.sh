@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# version 7-8-2021
 
 rc=$(git remote show origin |  grep "local out of date" | wc -l)
 
