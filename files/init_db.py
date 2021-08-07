@@ -47,9 +47,9 @@ try:
 
     print( dbclient.get_list_continuous_queries() )
         
-    DockerWatermeter_select_clause = 'SELECT mean("current_value") as "current_value",mean("pulse_count") as "pulse_count"'
-    dbclient.create_continuous_query("DockerWatermeter_mean60", DockerWatermeter_select_clause + ' INTO "60_days"."DockerWatermeter" FROM "DockerWatermeter" GROUP BY time(15m)', influx_database )
-    dbclient.create_continuous_query("DockerWatermeter_meaninf", DockerWatermeter_select_clause + ' INTO "infinite"."DockerWatermeter" FROM "DockerWatermeter" GROUP BY time(30m)', influx_database )
+    watermeter_select_clause = 'SELECT mean("current_value") as "current_value",mean("pulse_count") as "pulse_count"'
+    dbclient.create_continuous_query("watermeter_mean60", watermeter_select_clause + ' INTO "60_days"."watermeter" FROM "watermeter" GROUP BY time(15m)', influx_database )
+    dbclient.create_continuous_query("watermeter_meaninf", watermeter_select_clause + ' INTO "infinite"."watermeter" FROM "watermeter" GROUP BY time(30m)', influx_database )
 
     print( dbclient.get_list_continuous_queries() )
 

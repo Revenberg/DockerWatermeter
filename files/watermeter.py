@@ -7,17 +7,17 @@ import datetime
 import init_db
 from influxdb import InfluxDBClient
 
-print("DockerWatermeter 30-7-2021 22:37")
+print("watermeter 30-7-2021 22:37")
 
 config = configparser.RawConfigParser(allow_no_value=True)
 config.read("watermeter_config.ini")
 
-log_path = config.get('Logging', 'log_path', fallback='/var/log/solar/')
+log_path = config.get('Logging', 'log_path', fallback='/var/log/watermeter/')
 do_raw_log = config.getboolean('Logging', 'do_raw_log')
 
-mqttBroker = config.get('DockerWatermeter', 'mqttBroker')
-mqttPort = int(config.get('DockerWatermeter', 'mqttPort'))
-mqttKeepAlive = int(config.get('DockerWatermeter', 'mqttKeepAlive'))
+mqttBroker = config.get('Watermeter', 'mqttBroker')
+mqttPort = int(config.get('Watermeter', 'mqttPort'))
+mqttKeepAlive = int(config.get('Watermeter', 'mqttKeepAlive'))
 
 influx_server = config.get('InfluxDB', 'influx_server')
 influx_port = int(config.get('InfluxDB', 'influx_port'))
@@ -30,11 +30,11 @@ def on_message(mqtt_client, userdata, msg):
     global values
     today = datetime.datetime.now()
 
-    if msg.topic .lower() == "DockerWatermeter/reading/current_value" :
+    if msg.topic .lower() == "watermeter/reading/current_value" :
         values['current_value'] = int(str(msg.payload.decode("utf-8")))
         values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
 
-    if msg.topic .lower() == "DockerWatermeter/reading/pulse_count" :
+    if msg.topic .lower() == "watermeter/reading/pulse_count" :
         values['pulse_count'] = int(str(msg.payload.decode("utf-8")))
         values['datetime'] = today.strftime("%d/%m/%Y %H:%M:%S")
     
