@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# version 7-8-2021
+# version 2021-08-07 15:20
 
 cd ~/dockerwatermeter
 
