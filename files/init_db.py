@@ -9,7 +9,7 @@ import configparser
 from influxdb import InfluxDBClient
 
 config = configparser.RawConfigParser(allow_no_value=True)
-config.read("DockerWatermeter_config.ini")
+config.read("watermeter_config.ini")
 
 ###########################
 # Variables
