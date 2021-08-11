@@ -71,9 +71,6 @@ def getData(mqttBroker, mqttPort, mqttKeepAlive):
                         'measurement': influx_measurement
                         }        
             
-            print( json.dumps(json_body) )
-            sys.stdout.flush()
-
             client = InfluxDBClient(host=influx_server,
                             port=influx_port)
 
