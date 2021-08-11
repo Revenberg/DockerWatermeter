@@ -7,8 +7,6 @@ import datetime
 import init_db
 from influxdb import InfluxDBClient
 
-print("watermeter 30-7-2021 22:37")
-
 config = configparser.RawConfigParser(allow_no_value=True)
 config.read("config.ini")
 
