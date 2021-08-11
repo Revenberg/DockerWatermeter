@@ -50,6 +50,7 @@ def on_message(mqtt_client, userdata, msg):
     
 def getData(mqttBroker, mqttPort, mqttKeepAlive):
     global values
+    global previous_value
     
     mqtt_client = mqtt.Client("reader")
 
@@ -63,10 +64,7 @@ def getData(mqttBroker, mqttPort, mqttKeepAlive):
 
         time.sleep(60)
 
-        print( values )
-        sys.stdout.flush()
-
-        if values['usages'] > 0:
+        if previous_value > 0:
             json_body = {'points': [{
                             'fields': {k: v for k, v in values.items()}
                                     }],
