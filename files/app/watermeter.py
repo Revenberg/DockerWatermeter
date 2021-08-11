@@ -31,7 +31,7 @@ previous_value = 0
 def on_message(mqtt_client, userdata, msg):
     global values
     global previous_value
-    
+
     today = datetime.datetime.now()
 
     if msg.topic.lower() == "watermeter/reading/current_value" :        
@@ -62,6 +62,9 @@ def getData(mqttBroker, mqttPort, mqttKeepAlive):
         mqtt_client.on_message=on_message
 
         time.sleep(60)
+
+        print( values )
+        sys.stdout.flush()
 
         if values['usages'] > 0:
             json_body = {'points': [{
