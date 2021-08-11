@@ -10,7 +10,7 @@ from influxdb import InfluxDBClient
 print("watermeter 30-7-2021 22:37")
 
 config = configparser.RawConfigParser(allow_no_value=True)
-config.read("watermeter_config.ini")
+config.read("config.ini")
 
 log_path = config.get('Logging', 'log_path', fallback='/var/log/watermeter/')
 do_raw_log = config.getboolean('Logging', 'do_raw_log')
