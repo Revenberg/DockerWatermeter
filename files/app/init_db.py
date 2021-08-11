@@ -32,6 +32,7 @@ if __debug__:
 
 else:
     print("running without debug")
+sys.stdout.flush()
 
 # if the db is not found, then try to create it
 try:
