@@ -19,9 +19,9 @@ if [ $ex == true ]; then
     git pull
     chmod +x build.sh
 
-    docker image build -t revenberg/watermeter .
+    docker image build -t revenberg/watermeter:latest .
 
-    docker push revenberg/watermeter
+    docker push revenberg/watermeter:latest
 
     # testing: 
 
